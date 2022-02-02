@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj": {}
+    "D:\\VS\\Assignments\\Experion-Net-ALPHACRUX-RESTAPI\\Experion-Net-ALPHACRUX-RESTAPI\\Clinic Management System\\Clinic Management System.csproj": {}
   },
   "projects": {
-    "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj": {
+    "D:\\VS\\Assignments\\Experion-Net-ALPHACRUX-RESTAPI\\Experion-Net-ALPHACRUX-RESTAPI\\Clinic Management System\\Clinic Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj",
+        "projectUniqueName": "D:\\VS\\Assignments\\Experion-Net-ALPHACRUX-RESTAPI\\Experion-Net-ALPHACRUX-RESTAPI\\Clinic Management System\\Clinic Management System.csproj",
         "projectName": "Clinic Management System",
-        "projectPath": "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj",
-        "packagesPath": "C:\\Users\\arshin.sandi\\.nuget\\packages\\",
-        "outputPath": "E:\\Cll\\Clinic Management System\\obj\\",
+        "projectPath": "D:\\VS\\Assignments\\Experion-Net-ALPHACRUX-RESTAPI\\Experion-Net-ALPHACRUX-RESTAPI\\Clinic Management System\\Clinic Management System.csproj",
+        "packagesPath": "C:\\Users\\mohammed.gasni.EXPERIONGLOBAL\\.nuget\\packages\\",
+        "outputPath": "D:\\VS\\Assignments\\Experion-Net-ALPHACRUX-RESTAPI\\Experion-Net-ALPHACRUX-RESTAPI\\Clinic Management System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\arshin.sandi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mohammed.gasni.EXPERIONGLOBAL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,30 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
