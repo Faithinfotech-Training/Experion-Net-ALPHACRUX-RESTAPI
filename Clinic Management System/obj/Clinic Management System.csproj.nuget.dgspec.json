@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alfina.sulfikar\\Desktop\\Sahadan Sir\\Web API\\CMS\\Clinic Management System\\Clinic Management System.csproj": {}
+    "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alfina.sulfikar\\Desktop\\Sahadan Sir\\Web API\\CMS\\Clinic Management System\\Clinic Management System.csproj": {
+    "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alfina.sulfikar\\Desktop\\Sahadan Sir\\Web API\\CMS\\Clinic Management System\\Clinic Management System.csproj",
+        "projectUniqueName": "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj",
         "projectName": "Clinic Management System",
-        "projectPath": "C:\\Users\\alfina.sulfikar\\Desktop\\Sahadan Sir\\Web API\\CMS\\Clinic Management System\\Clinic Management System.csproj",
-        "packagesPath": "C:\\Users\\alfina.sulfikar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alfina.sulfikar\\Desktop\\Sahadan Sir\\Web API\\CMS\\Clinic Management System\\obj\\",
+        "projectPath": "E:\\Cll\\Clinic Management System\\Clinic Management System.csproj",
+        "packagesPath": "C:\\Users\\arshin.sandi\\.nuget\\packages\\",
+        "outputPath": "E:\\Cll\\Clinic Management System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\alfina.sulfikar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arshin.sandi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
