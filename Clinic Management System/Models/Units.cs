@@ -5,10 +5,14 @@ namespace Clinic_Management_System.Models
 {
     public partial class Units
     {
+        public Units()
+        {
+            TestDetails = new HashSet<TestDetails>();
+        }
+
         public int UnitId { get; set; }
         public string TestUnit { get; set; }
-        public int? TestId { get; set; }
 
-        public virtual TestDetails Test { get; set; }
+        public virtual ICollection<TestDetails> TestDetails { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace Clinic_Management_System.Models
         public int MedicalListId { get; set; }
         public string OldData { get; set; }
         public string NewData { get; set; }
+        public DateTime? DateTime { get; set; }
         public int? PatientId { get; set; }
         public int? StaffId { get; set; }
 

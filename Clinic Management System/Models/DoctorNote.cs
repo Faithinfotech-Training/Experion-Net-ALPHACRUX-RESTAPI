@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Clinic_Management_System.Models
 {
-    public partial class Tokens
+    public partial class DoctorNote
     {
-        public int TokenId { get; set; }
-        public int? TokenNum { get; set; }
-        public DateTime TokenDateTime { get; set; }
+        public int NoteId { get; set; }
+        public string NoteData { get; set; }
+        public DateTime? DateTime { get; set; }
         public int? PatientId { get; set; }
         public int? StaffId { get; set; }
 

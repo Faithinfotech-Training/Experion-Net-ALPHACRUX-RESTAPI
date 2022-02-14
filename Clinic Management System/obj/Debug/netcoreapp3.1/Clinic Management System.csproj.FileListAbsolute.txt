@@ -1,0 +1,55 @@
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\appsettings.json
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.exe
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.deps.json
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.runtimeconfig.json
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.runtimeconfig.dev.json
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Clinic Management System.pdb
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\VS\Projects\Clinic Management System\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.csproj.AssemblyReference.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.AssemblyInfoInputs.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.AssemblyInfo.cs
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.csproj.CoreCompileInputs.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.MvcApplicationPartsAssemblyInfo.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\staticwebassets\Clinic Management System.StaticWebAssets.Manifest.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\staticwebassets\Clinic Management System.StaticWebAssets.xml
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\scopedcss\bundle\Clinic Management System.styles.css
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.RazorTargetAssemblyInfo.cache
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.csproj.CopyComplete
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.dll
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.pdb
+D:\VS\Projects\Clinic Management System\obj\Debug\netcoreapp3.1\Clinic Management System.genruntimeconfig.cache

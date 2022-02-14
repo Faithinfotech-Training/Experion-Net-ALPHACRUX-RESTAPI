@@ -7,7 +7,7 @@ namespace Clinic_Management_System.Models
     {
         public int PaymentId { get; set; }
         public string PaymentMode { get; set; }
-        public int TransactionNumber { get; set; }
+        public int? TransactionNumber { get; set; }
         public DateTime PaymentsDateTime { get; set; }
         public int? PatientId { get; set; }
 
