@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CMS_Project.Models
+namespace Clinic_Management_System.Models
 {
     public partial class MedicalHistory
     {

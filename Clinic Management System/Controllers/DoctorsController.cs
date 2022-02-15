@@ -25,8 +25,8 @@ namespace Clinic_Management_System.Controllers
             _doctorRepository = doctorRepository;
         }
 
-        
-        
+
+        /*
         //get user by username
         [HttpGet]
         [Route("patient/getpatient")]
@@ -166,6 +166,61 @@ namespace Clinic_Management_System.Controllers
                 return BadRequest();
             }
         #endregion
-        
+        */
+
+        #region Post vitals
+
+        //Methods: /api/doctors/vitals
+        [HttpPost("Vitals")]
+        public async Task<IActionResult> PostVitals([FromBody] Vitals vitals)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var vitalsId = await _doctorRepository.PostVitals(vitals);
+                    if (vitalsId > 0)
+                    {
+                        return Ok(vitalsId);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+        #endregion
+
+        #region List vitals
+
+        [HttpGet]
+        [Route("GetVitals")]
+        public async Task<IActionResult> GetVitals()
+        {
+            try
+            {
+                var vitals = await _doctorRepository.GetVitalsList();
+                if (vitals == null)
+                {
+                    return NotFound();
+                }
+                return Ok(vitals);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
+
+
     }
 }

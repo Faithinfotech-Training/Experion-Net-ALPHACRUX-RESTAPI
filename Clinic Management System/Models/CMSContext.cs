@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CMS_Project.Models
+namespace Clinic_Management_System.Models
 {
     public partial class CMSContext : DbContext
     {
@@ -39,21 +39,23 @@ namespace CMS_Project.Models
         public virtual DbSet<Units> Units { get; set; }
         public virtual DbSet<Vitals> Vitals { get; set; }
 
-       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source= ALFINASULFIKAR\\SQLEXPRESS; Initial Catalog= CMS; Integrated security=True");
+                optionsBuilder.UseSqlServer("Data Source= MOHAMMEDGASNI; Initial Catalog= CMS; Integrated security=True");
             }
-        }*/
+        }
+        */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Authentications>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__authenti__B9BE370FF9816F9C");
+                    .HasName("PK__authenti__B9BE370F4AF6FE1F");
 
                 entity.ToTable("authentications");
 
@@ -82,7 +84,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<ConsultationBills>(entity =>
             {
                 entity.HasKey(e => e.ConsultationBillId)
-                    .HasName("PK__consulta__DD3FD66716D0A1F6");
+                    .HasName("PK__consulta__DD3FD66737CCFFBD");
 
                 entity.ToTable("consultation_bills");
 
@@ -113,7 +115,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<DoctorNote>(entity =>
             {
                 entity.HasKey(e => e.NoteId)
-                    .HasName("PK__doctor_n__6B7594ECD273D44B");
+                    .HasName("PK__doctor_n__6B7594EC8769C0BE");
 
                 entity.ToTable("doctor_note");
 
@@ -146,7 +148,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<LabBills>(entity =>
             {
                 entity.HasKey(e => e.LabBillId)
-                    .HasName("PK__lab_bill__F353DA8EF5F1968A");
+                    .HasName("PK__lab_bill__F353DA8E2ABDD879");
 
                 entity.ToTable("lab_bills");
 
@@ -183,7 +185,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Manufactures>(entity =>
             {
                 entity.HasKey(e => e.ManufactureId)
-                    .HasName("PK__manufact__1F2B08C3FE777709");
+                    .HasName("PK__manufact__1F2B08C34ECAD450");
 
                 entity.ToTable("manufactures");
 
@@ -217,7 +219,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<MedicalHistory>(entity =>
             {
                 entity.HasKey(e => e.MedicalListId)
-                    .HasName("PK__medical___4CECA9C7517E3131");
+                    .HasName("PK__medical___4CECA9C716FE78B5");
 
                 entity.ToTable("medical_history");
 
@@ -254,7 +256,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<MedicineBills>(entity =>
             {
                 entity.HasKey(e => e.MedicineBillId)
-                    .HasName("PK__medicine__B47E7D0F18F5D537");
+                    .HasName("PK__medicine__B47E7D0FED54194F");
 
                 entity.ToTable("medicine_bills");
 
@@ -300,7 +302,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<MedicineDetails>(entity =>
             {
                 entity.HasKey(e => e.MedicineId)
-                    .HasName("PK__medicine__E7148EBBBC51B7F0");
+                    .HasName("PK__medicine__E7148EBBF6126B34");
 
                 entity.ToTable("medicine_details");
 
@@ -328,7 +330,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<MedicineInventories>(entity =>
             {
                 entity.HasKey(e => e.InventoryId)
-                    .HasName("PK__medicine__B59ACC4988E6F29F");
+                    .HasName("PK__medicine__B59ACC495E7FE37A");
 
                 entity.ToTable("medicine_inventories");
 
@@ -366,7 +368,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<MedicineLists>(entity =>
             {
                 entity.HasKey(e => e.MedicineListId)
-                    .HasName("PK__medicine__43D1547C8FC9D13C");
+                    .HasName("PK__medicine__43D1547C614FEE93");
 
                 entity.ToTable("medicine_lists");
 
@@ -400,7 +402,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Patients>(entity =>
             {
                 entity.HasKey(e => e.PatientId)
-                    .HasName("PK__patients__4D5CE476DD8ECCCB");
+                    .HasName("PK__patients__4D5CE4763794598D");
 
                 entity.ToTable("patients");
 
@@ -446,7 +448,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Payments>(entity =>
             {
                 entity.HasKey(e => e.PaymentId)
-                    .HasName("PK__payments__ED1FC9EA7921AB76");
+                    .HasName("PK__payments__ED1FC9EA9D8B6CB8");
 
                 entity.ToTable("payments");
 
@@ -476,7 +478,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<PrescribedMedicines>(entity =>
             {
                 entity.HasKey(e => e.PrescriptionId)
-                    .HasName("PK__prescrib__3EE444F8CB8DD587");
+                    .HasName("PK__prescrib__3EE444F88DC8FABD");
 
                 entity.ToTable("prescribed_medicines");
 
@@ -505,7 +507,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Qualifications>(entity =>
             {
                 entity.HasKey(e => e.QualificationId)
-                    .HasName("PK__qualific__CDACC5DBB15E34D5");
+                    .HasName("PK__qualific__CDACC5DBDF99DB01");
 
                 entity.ToTable("qualifications");
 
@@ -521,7 +523,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__roles__760965CC71843726");
+                    .HasName("PK__roles__760965CC41C3BD6D");
 
                 entity.ToTable("roles");
 
@@ -537,7 +539,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Staffs>(entity =>
             {
                 entity.HasKey(e => e.StaffId)
-                    .HasName("PK__staffs__1963DD9CF58AD372");
+                    .HasName("PK__staffs__1963DD9C9F6381E6");
 
                 entity.ToTable("staffs");
 
@@ -593,7 +595,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<TestAdvices>(entity =>
             {
                 entity.HasKey(e => e.AdviceId)
-                    .HasName("PK__test_adv__A2B9EF6A0263C590");
+                    .HasName("PK__test_adv__A2B9EF6AB3609421");
 
                 entity.ToTable("test_advices");
 
@@ -628,7 +630,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<TestDetails>(entity =>
             {
                 entity.HasKey(e => e.TestId)
-                    .HasName("PK__test_det__F3FF1C02D185DC56");
+                    .HasName("PK__test_det__F3FF1C029E855080");
 
                 entity.ToTable("test_details");
 
@@ -657,7 +659,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<TestLists>(entity =>
             {
                 entity.HasKey(e => e.TestListId)
-                    .HasName("PK__test_lis__932FE13005198C6D");
+                    .HasName("PK__test_lis__932FE130373C64BC");
 
                 entity.ToTable("test_lists");
 
@@ -689,7 +691,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<TestReports>(entity =>
             {
                 entity.HasKey(e => e.ReportId)
-                    .HasName("PK__test_rep__779B7C58E269B040");
+                    .HasName("PK__test_rep__779B7C588313A044");
 
                 entity.ToTable("test_reports");
 
@@ -733,7 +735,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Tokens>(entity =>
             {
                 entity.HasKey(e => e.TokenId)
-                    .HasName("PK__tokens__CB3C9E172B6170FB");
+                    .HasName("PK__tokens__CB3C9E172EE5B700");
 
                 entity.ToTable("tokens");
 
@@ -764,7 +766,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Units>(entity =>
             {
                 entity.HasKey(e => e.UnitId)
-                    .HasName("PK__units__D3AF5BD7D9E9082D");
+                    .HasName("PK__units__D3AF5BD76D8276DA");
 
                 entity.ToTable("units");
 
@@ -780,7 +782,7 @@ namespace CMS_Project.Models
             modelBuilder.Entity<Vitals>(entity =>
             {
                 entity.HasKey(e => e.VitalId)
-                    .HasName("PK__vitals__4DF3C47197E8669C");
+                    .HasName("PK__vitals__4DF3C471C8862D62");
 
                 entity.ToTable("vitals");
 

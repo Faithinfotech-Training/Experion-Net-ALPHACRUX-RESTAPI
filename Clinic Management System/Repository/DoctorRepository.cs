@@ -21,7 +21,26 @@ namespace Clinic_Management_System.Repository
             _context = context;
         }
 
-       
+        public async Task<List<Vitals>> GetVitalsList()
+        {
+            return await _context.Vitals.ToListAsync();
+        }
+
+        #region Add vitals
+
+        public async Task<int> PostVitals(Vitals vitals)
+        {
+            if(_context!= null)
+            {
+                await _context.Vitals.AddAsync(vitals);
+                await _context.SaveChangesAsync();
+                return vitals.VitalId;
+            }
+            return 0;
+        }
+        #endregion
+
+        /*
 
         #region Get Patient
 
@@ -75,20 +94,6 @@ namespace Clinic_Management_System.Repository
             return null;
         }
 
-        #endregion
-
-        #region Add vitals
-
-        public async Task<int> PostVitals(Patients patient)
-        {
-            if(_context!= null)
-            {
-                await _context.Patients.AddAsync(patient);
-                await _context.SaveChangesAsync();
-                return patient.PatientId;
-            }
-            return 0;
-        }
         #endregion
 
         #region Add Medicine
@@ -158,5 +163,6 @@ namespace Clinic_Management_System.Repository
             return 0;
         }
         #endregion
+        */
     }
 }

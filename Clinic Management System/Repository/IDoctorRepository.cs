@@ -9,8 +9,16 @@ namespace Clinic_Management_System.Repository
 {
     public interface IDoctorRepository
     {
-        
 
+
+        //Doctor records the vitals of patient
+        Task<int> PostVitals(Vitals vitals);
+
+        //List vitals
+        Task<List<Vitals>> GetVitalsList();
+
+
+        /*
         //retrieves patient data
 
         Task<DoctorViewModel> GetPatient(int? patientId);
@@ -23,11 +31,6 @@ namespace Clinic_Management_System.Repository
 
        Task<int> CreateDoctorNote(MedicalHistory note);
 
-
-
-        //Doctor records the vitals of patient
-        Task<int> PostVitals(Patients patient);
-
         //Doctor prescribes medicine
         Task<int> PostMedicine(DoctorViewModel medicine);
 
@@ -35,7 +38,7 @@ namespace Clinic_Management_System.Repository
 
         Task<int> PostLabTest(DoctorViewModel labTest);
 
-
+        */
     }
 }
 
