@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class Patients
     {
         public Patients()
         {
             ConsultationBills = new HashSet<ConsultationBills>();
+            DoctorNote = new HashSet<DoctorNote>();
             LabBills = new HashSet<LabBills>();
             MedicalHistory = new HashSet<MedicalHistory>();
             MedicineBills = new HashSet<MedicineBills>();
@@ -29,6 +30,7 @@ namespace Clinic_Management_System.Models
         public DateTime PatientDob { get; set; }
 
         public virtual ICollection<ConsultationBills> ConsultationBills { get; set; }
+        public virtual ICollection<DoctorNote> DoctorNote { get; set; }
         public virtual ICollection<LabBills> LabBills { get; set; }
         public virtual ICollection<MedicalHistory> MedicalHistory { get; set; }
         public virtual ICollection<MedicineBills> MedicineBills { get; set; }

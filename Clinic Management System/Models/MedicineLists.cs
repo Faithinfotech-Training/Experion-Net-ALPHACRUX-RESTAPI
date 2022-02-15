@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class MedicineLists
     {

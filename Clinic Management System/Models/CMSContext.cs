@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class CMSContext : DbContext
     {
@@ -17,6 +17,7 @@ namespace Clinic_Management_System.Models
 
         public virtual DbSet<Authentications> Authentications { get; set; }
         public virtual DbSet<ConsultationBills> ConsultationBills { get; set; }
+        public virtual DbSet<DoctorNote> DoctorNote { get; set; }
         public virtual DbSet<LabBills> LabBills { get; set; }
         public virtual DbSet<Manufactures> Manufactures { get; set; }
         public virtual DbSet<MedicalHistory> MedicalHistory { get; set; }
@@ -38,7 +39,7 @@ namespace Clinic_Management_System.Models
         public virtual DbSet<Units> Units { get; set; }
         public virtual DbSet<Vitals> Vitals { get; set; }
 
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
@@ -52,7 +53,7 @@ namespace Clinic_Management_System.Models
             modelBuilder.Entity<Authentications>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__authenti__B9BE370FCA1CBBB8");
+                    .HasName("PK__authenti__B9BE370FF9816F9C");
 
                 entity.ToTable("authentications");
 
@@ -75,13 +76,13 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.Authentications)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__authentic__staff__4BAC3F29");
+                    .HasConstraintName("FK__authentic__staff__4E88ABD4");
             });
 
             modelBuilder.Entity<ConsultationBills>(entity =>
             {
                 entity.HasKey(e => e.ConsultationBillId)
-                    .HasName("PK__consulta__DD3FD6679E66CFF8");
+                    .HasName("PK__consulta__DD3FD66716D0A1F6");
 
                 entity.ToTable("consultation_bills");
 
@@ -91,7 +92,8 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.ConsultationDateTime)
                     .HasColumnName("consultation_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
 
@@ -100,18 +102,51 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.ConsultationBills)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__consultat__patie__4E88ABD4");
+                    .HasConstraintName("FK__consultat__patie__52593CB8");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.ConsultationBills)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__consultat__staff__4F7CD00D");
+                    .HasConstraintName("FK__consultat__staff__534D60F1");
+            });
+
+            modelBuilder.Entity<DoctorNote>(entity =>
+            {
+                entity.HasKey(e => e.NoteId)
+                    .HasName("PK__doctor_n__6B7594ECD273D44B");
+
+                entity.ToTable("doctor_note");
+
+                entity.Property(e => e.NoteId).HasColumnName("note__id");
+
+                entity.Property(e => e.DateTime)
+                    .HasColumnName("date_time")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.NoteData)
+                    .HasColumnName("note_data")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PatientId).HasColumnName("patient_id");
+
+                entity.Property(e => e.StaffId).HasColumnName("staff_id");
+
+                entity.HasOne(d => d.Patient)
+                    .WithMany(p => p.DoctorNote)
+                    .HasForeignKey(d => d.PatientId)
+                    .HasConstraintName("FK__doctor_no__patie__07C12930");
+
+                entity.HasOne(d => d.Staff)
+                    .WithMany(p => p.DoctorNote)
+                    .HasForeignKey(d => d.StaffId)
+                    .HasConstraintName("FK__doctor_no__staff__08B54D69");
             });
 
             modelBuilder.Entity<LabBills>(entity =>
             {
                 entity.HasKey(e => e.LabBillId)
-                    .HasName("PK__lab_bill__F353DA8EB255CFC5");
+                    .HasName("PK__lab_bill__F353DA8EF5F1968A");
 
                 entity.ToTable("lab_bills");
 
@@ -121,7 +156,8 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.LabBillDateTime)
                     .HasColumnName("lab_bill_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
 
@@ -136,18 +172,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.LabBills)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__lab_bills__patie__6754599E");
+                    .HasConstraintName("FK__lab_bills__patie__6FE99F9F");
 
                 entity.HasOne(d => d.TestList)
                     .WithMany(p => p.LabBills)
                     .HasForeignKey(d => d.TestListId)
-                    .HasConstraintName("FK__lab_bills__test___66603565");
+                    .HasConstraintName("FK__lab_bills__test___6EF57B66");
             });
 
             modelBuilder.Entity<Manufactures>(entity =>
             {
                 entity.HasKey(e => e.ManufactureId)
-                    .HasName("PK__manufact__1F2B08C33C317FB3");
+                    .HasName("PK__manufact__1F2B08C3FE777709");
 
                 entity.ToTable("manufactures");
 
@@ -181,20 +217,23 @@ namespace Clinic_Management_System.Models
             modelBuilder.Entity<MedicalHistory>(entity =>
             {
                 entity.HasKey(e => e.MedicalListId)
-                    .HasName("PK__medical___4CECA9C70F566904");
+                    .HasName("PK__medical___4CECA9C7517E3131");
 
                 entity.ToTable("medical_history");
 
                 entity.Property(e => e.MedicalListId).HasColumnName("medical_list_id");
 
+                entity.Property(e => e.DateTime)
+                    .HasColumnName("date_time")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.NewData)
                     .HasColumnName("new_data")
-                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.OldData)
                     .HasColumnName("old_data")
-                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
@@ -204,18 +243,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.MedicalHistory)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__medical_h__patie__787EE5A0");
+                    .HasConstraintName("FK__medical_h__patie__02FC7413");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.MedicalHistory)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__medical_h__staff__797309D9");
+                    .HasConstraintName("FK__medical_h__staff__03F0984C");
             });
 
             modelBuilder.Entity<MedicineBills>(entity =>
             {
                 entity.HasKey(e => e.MedicineBillId)
-                    .HasName("PK__medicine__B47E7D0F466FFFE8");
+                    .HasName("PK__medicine__B47E7D0F18F5D537");
 
                 entity.ToTable("medicine_bills");
 
@@ -227,7 +266,8 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.MedicineBillDateTime)
                     .HasColumnName("medicine_bill_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.MedicineName)
                     .IsRequired()
@@ -244,23 +284,23 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Inventory)
                     .WithMany(p => p.MedicineBills)
                     .HasForeignKey(d => d.InventoryId)
-                    .HasConstraintName("FK__medicine___inven__70DDC3D8");
+                    .HasConstraintName("FK__medicine___inven__7A672E12");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.MedicineBills)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__medicine___patie__6FE99F9F");
+                    .HasConstraintName("FK__medicine___patie__797309D9");
 
                 entity.HasOne(d => d.Prescription)
                     .WithMany(p => p.MedicineBills)
                     .HasForeignKey(d => d.PrescriptionId)
-                    .HasConstraintName("FK__medicine___presc__71D1E811");
+                    .HasConstraintName("FK__medicine___presc__7B5B524B");
             });
 
             modelBuilder.Entity<MedicineDetails>(entity =>
             {
                 entity.HasKey(e => e.MedicineId)
-                    .HasName("PK__medicine__E7148EBB46465E6B");
+                    .HasName("PK__medicine__E7148EBBBC51B7F0");
 
                 entity.ToTable("medicine_details");
 
@@ -288,7 +328,7 @@ namespace Clinic_Management_System.Models
             modelBuilder.Entity<MedicineInventories>(entity =>
             {
                 entity.HasKey(e => e.InventoryId)
-                    .HasName("PK__medicine__B59ACC49BC0FE7DC");
+                    .HasName("PK__medicine__B59ACC4988E6F29F");
 
                 entity.ToTable("medicine_inventories");
 
@@ -315,18 +355,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Manufacture)
                     .WithMany(p => p.MedicineInventories)
                     .HasForeignKey(d => d.ManufactureId)
-                    .HasConstraintName("FK__medicine___manuf__6D0D32F4");
+                    .HasConstraintName("FK__medicine___manuf__75A278F5");
 
                 entity.HasOne(d => d.Medicine)
                     .WithMany(p => p.MedicineInventories)
                     .HasForeignKey(d => d.MedicineId)
-                    .HasConstraintName("FK__medicine___medic__6C190EBB");
+                    .HasConstraintName("FK__medicine___medic__74AE54BC");
             });
 
             modelBuilder.Entity<MedicineLists>(entity =>
             {
                 entity.HasKey(e => e.MedicineListId)
-                    .HasName("PK__medicine__43D1547C6FDB4D61");
+                    .HasName("PK__medicine__43D1547C8FC9D13C");
 
                 entity.ToTable("medicine_lists");
 
@@ -349,18 +389,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Medicine)
                     .WithMany(p => p.MedicineLists)
                     .HasForeignKey(d => d.MedicineId)
-                    .HasConstraintName("FK__medicine___medic__74AE54BC");
+                    .HasConstraintName("FK__medicine___medic__7E37BEF6");
 
                 entity.HasOne(d => d.Prescription)
                     .WithMany(p => p.MedicineLists)
                     .HasForeignKey(d => d.PrescriptionId)
-                    .HasConstraintName("FK__medicine___presc__75A278F5");
+                    .HasConstraintName("FK__medicine___presc__7F2BE32F");
             });
 
             modelBuilder.Entity<Patients>(entity =>
             {
                 entity.HasKey(e => e.PatientId)
-                    .HasName("PK__patients__4D5CE476AF867F45");
+                    .HasName("PK__patients__4D5CE476DD8ECCCB");
 
                 entity.ToTable("patients");
 
@@ -406,7 +446,7 @@ namespace Clinic_Management_System.Models
             modelBuilder.Entity<Payments>(entity =>
             {
                 entity.HasKey(e => e.PaymentId)
-                    .HasName("PK__payments__ED1FC9EAF53CD7FC");
+                    .HasName("PK__payments__ED1FC9EA7921AB76");
 
                 entity.ToTable("payments");
 
@@ -422,20 +462,21 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.PaymentsDateTime)
                     .HasColumnName("payments_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.TransactionNumber).HasColumnName("transaction_number");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__payments__patien__412EB0B6");
+                    .HasConstraintName("FK__payments__patien__45F365D3");
             });
 
             modelBuilder.Entity<PrescribedMedicines>(entity =>
             {
                 entity.HasKey(e => e.PrescriptionId)
-                    .HasName("PK__prescrib__3EE444F86B62F41B");
+                    .HasName("PK__prescrib__3EE444F8CB8DD587");
 
                 entity.ToTable("prescribed_medicines");
 
@@ -445,25 +486,26 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.PrescriptionDateTime)
                     .HasColumnName("prescription_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.StaffId).HasColumnName("staff_id");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.PrescribedMedicines)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__prescribe__patie__5629CD9C");
+                    .HasConstraintName("FK__prescribe__patie__5BE2A6F2");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.PrescribedMedicines)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__prescribe__staff__571DF1D5");
+                    .HasConstraintName("FK__prescribe__staff__5CD6CB2B");
             });
 
             modelBuilder.Entity<Qualifications>(entity =>
             {
                 entity.HasKey(e => e.QualificationId)
-                    .HasName("PK__qualific__CDACC5DBE558D48D");
+                    .HasName("PK__qualific__CDACC5DBB15E34D5");
 
                 entity.ToTable("qualifications");
 
@@ -474,19 +516,12 @@ namespace Clinic_Management_System.Models
                     .HasColumnName("qualification_name")
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.StaffId).HasColumnName("staff_id");
-
-                entity.HasOne(d => d.Staff)
-                    .WithMany(p => p.Qualifications)
-                    .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__qualifica__staff__48CFD27E");
             });
 
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__roles__760965CCA2E23EA3");
+                    .HasName("PK__roles__760965CC71843726");
 
                 entity.ToTable("roles");
 
@@ -502,11 +537,15 @@ namespace Clinic_Management_System.Models
             modelBuilder.Entity<Staffs>(entity =>
             {
                 entity.HasKey(e => e.StaffId)
-                    .HasName("PK__staffs__1963DD9C070DEFA4");
+                    .HasName("PK__staffs__1963DD9CF58AD372");
 
                 entity.ToTable("staffs");
 
                 entity.Property(e => e.StaffId).HasColumnName("staff_id");
+
+                entity.Property(e => e.QualificationId).HasColumnName("qualification_id");
+
+                entity.Property(e => e.RoleId).HasColumnName("role_id");
 
                 entity.Property(e => e.StaffAddress)
                     .IsRequired()
@@ -539,12 +578,22 @@ namespace Clinic_Management_System.Models
                     .HasColumnName("staff_phone")
                     .HasMaxLength(20)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Qualification)
+                    .WithMany(p => p.Staffs)
+                    .HasForeignKey(d => d.QualificationId)
+                    .HasConstraintName("FK__staffs__qualific__4BAC3F29");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Staffs)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK__staffs__role_id__4AB81AF0");
             });
 
             modelBuilder.Entity<TestAdvices>(entity =>
             {
                 entity.HasKey(e => e.AdviceId)
-                    .HasName("PK__test_adv__A2B9EF6A5173394A");
+                    .HasName("PK__test_adv__A2B9EF6A0263C590");
 
                 entity.ToTable("test_advices");
 
@@ -556,7 +605,8 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.TestAdviceDateTime)
                     .HasColumnName("test_advice_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.TestName)
                     .IsRequired()
@@ -567,18 +617,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.TestAdvices)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__test_advi__patie__5EBF139D");
+                    .HasConstraintName("FK__test_advi__patie__66603565");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.TestAdvices)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__test_advi__staff__5FB337D6");
+                    .HasConstraintName("FK__test_advi__staff__6754599E");
             });
 
             modelBuilder.Entity<TestDetails>(entity =>
             {
                 entity.HasKey(e => e.TestId)
-                    .HasName("PK__test_det__F3FF1C0249933CAD");
+                    .HasName("PK__test_det__F3FF1C02D185DC56");
 
                 entity.ToTable("test_details");
 
@@ -588,8 +638,6 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.MinimumValue).HasColumnName("minimum_value");
 
-                entity.Property(e => e.NormalValue).HasColumnName("normal_value");
-
                 entity.Property(e => e.TestAmount).HasColumnName("test_amount");
 
                 entity.Property(e => e.TestName)
@@ -597,12 +645,19 @@ namespace Clinic_Management_System.Models
                     .HasColumnName("test_name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UnitId).HasColumnName("unit_id");
+
+                entity.HasOne(d => d.Unit)
+                    .WithMany(p => p.TestDetails)
+                    .HasForeignKey(d => d.UnitId)
+                    .HasConstraintName("FK__test_deta__unit___3A81B327");
             });
 
             modelBuilder.Entity<TestLists>(entity =>
             {
                 entity.HasKey(e => e.TestListId)
-                    .HasName("PK__test_lis__932FE13080A93677");
+                    .HasName("PK__test_lis__932FE13005198C6D");
 
                 entity.ToTable("test_lists");
 
@@ -623,18 +678,18 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Advice)
                     .WithMany(p => p.TestLists)
                     .HasForeignKey(d => d.AdviceId)
-                    .HasConstraintName("FK__test_list__advic__628FA481");
+                    .HasConstraintName("FK__test_list__advic__6A30C649");
 
                 entity.HasOne(d => d.Test)
                     .WithMany(p => p.TestLists)
                     .HasForeignKey(d => d.TestId)
-                    .HasConstraintName("FK__test_list__test___6383C8BA");
+                    .HasConstraintName("FK__test_list__test___6B24EA82");
             });
 
             modelBuilder.Entity<TestReports>(entity =>
             {
                 entity.HasKey(e => e.ReportId)
-                    .HasName("PK__test_rep__779B7C58EAAFB117");
+                    .HasName("PK__test_rep__779B7C58E269B040");
 
                 entity.ToTable("test_reports");
 
@@ -652,7 +707,8 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.ReportDateTime)
                     .HasColumnName("report_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.StaffId).HasColumnName("staff_id");
 
@@ -661,23 +717,23 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.TestReports)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__test_repo__patie__59FA5E80");
+                    .HasConstraintName("FK__test_repo__patie__60A75C0F");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.TestReports)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__test_repo__staff__5AEE82B9");
+                    .HasConstraintName("FK__test_repo__staff__619B8048");
 
                 entity.HasOne(d => d.Test)
                     .WithMany(p => p.TestReports)
                     .HasForeignKey(d => d.TestId)
-                    .HasConstraintName("FK__test_repo__test___5BE2A6F2");
+                    .HasConstraintName("FK__test_repo__test___628FA481");
             });
 
             modelBuilder.Entity<Tokens>(entity =>
             {
                 entity.HasKey(e => e.TokenId)
-                    .HasName("PK__tokens__CB3C9E172875B95C");
+                    .HasName("PK__tokens__CB3C9E172B6170FB");
 
                 entity.ToTable("tokens");
 
@@ -689,48 +745,42 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.TokenDateTime)
                     .HasColumnName("token_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.TokenNum).HasColumnName("token_num");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Tokens)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__tokens__patient___52593CB8");
+                    .HasConstraintName("FK__tokens__patient___571DF1D5");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.Tokens)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__tokens__staff_id__534D60F1");
+                    .HasConstraintName("FK__tokens__staff_id__5812160E");
             });
 
             modelBuilder.Entity<Units>(entity =>
             {
                 entity.HasKey(e => e.UnitId)
-                    .HasName("PK__units__D3AF5BD7BFF02ED8");
+                    .HasName("PK__units__D3AF5BD7D9E9082D");
 
                 entity.ToTable("units");
 
                 entity.Property(e => e.UnitId).HasColumnName("unit_id");
-
-                entity.Property(e => e.TestId).HasColumnName("test_id");
 
                 entity.Property(e => e.TestUnit)
                     .IsRequired()
                     .HasColumnName("test_unit")
                     .HasMaxLength(10)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.Test)
-                    .WithMany(p => p.Units)
-                    .HasForeignKey(d => d.TestId)
-                    .HasConstraintName("FK__units__test_id__440B1D61");
             });
 
             modelBuilder.Entity<Vitals>(entity =>
             {
                 entity.HasKey(e => e.VitalId)
-                    .HasName("PK__vitals__4DF3C47104175222");
+                    .HasName("PK__vitals__4DF3C47197E8669C");
 
                 entity.ToTable("vitals");
 
@@ -748,12 +798,13 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.VitalDateTime)
                     .HasColumnName("vital_date_time")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Vitals)
                     .HasForeignKey(d => d.PatientId)
-                    .HasConstraintName("FK__vitals__patient___3E52440B");
+                    .HasConstraintName("FK__vitals__patient___4222D4EF");
             });
 
             OnModelCreatingPartial(modelBuilder);

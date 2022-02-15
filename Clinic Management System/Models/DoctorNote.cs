@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace CMS_Project.Models
 {
-    public partial class MedicalHistory
+    public partial class DoctorNote
     {
-        public int MedicalListId { get; set; }
-        public string OldData { get; set; }
-        public string NewData { get; set; }
+        public int NoteId { get; set; }
+        public string NoteData { get; set; }
         public DateTime? DateTime { get; set; }
         public int? PatientId { get; set; }
         public int? StaffId { get; set; }

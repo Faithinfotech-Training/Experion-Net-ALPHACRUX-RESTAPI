@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class Payments
     {
         public int PaymentId { get; set; }
         public string PaymentMode { get; set; }
-        public int TransactionNumber { get; set; }
+        public int? TransactionNumber { get; set; }
         public DateTime PaymentsDateTime { get; set; }
         public int? PatientId { get; set; }
 
