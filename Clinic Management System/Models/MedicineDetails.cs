@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class MedicineDetails
     {
@@ -16,7 +16,7 @@ namespace Clinic_Management_System.Models
         public int MedicineQuantity { get; set; }
         public int MedicinePrice { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public DateTime ManufacturingDate { get; set; }
+        public DateTime? ManufacturingDate { get; set; }
 
         public virtual ICollection<MedicineInventories> MedicineInventories { get; set; }
         public virtual ICollection<MedicineLists> MedicineLists { get; set; }

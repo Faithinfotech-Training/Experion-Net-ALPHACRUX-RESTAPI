@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clinic_Management_System.Models
+namespace CMS_Project.Models
 {
     public partial class Tokens
     {
         public int TokenId { get; set; }
-        public byte TokenNum { get; set; }
+        public int? TokenNum { get; set; }
         public DateTime TokenDateTime { get; set; }
         public int? PatientId { get; set; }
         public int? StaffId { get; set; }
