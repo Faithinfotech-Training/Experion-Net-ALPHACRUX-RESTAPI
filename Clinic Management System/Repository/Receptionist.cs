@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Clinic_Management_System.Repositories;
 using Clinic_Management_System.Models;
 using Clinic_Management_System.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace Clinic_Management_System.Repositories
+namespace Clinic_Management_System.Repository
 {
     public class Receptionist : IReceptionist
     {

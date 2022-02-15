@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Clinic_Management_System.Models;
 
-namespace Clinic_Management_System.Repositories
+namespace Clinic_Management_System.Repository
 {
     public interface IReceptionist
     {

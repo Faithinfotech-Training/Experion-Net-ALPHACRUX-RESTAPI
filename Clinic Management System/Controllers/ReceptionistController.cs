@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Clinic_Management_System.Models;
-using Clinic_Management_System.Repositories;
+using Clinic_Management_System.Repository;
 
 namespace Clinic_Management_System.Controllers
 {
