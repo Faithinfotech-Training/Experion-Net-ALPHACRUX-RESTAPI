@@ -15,6 +15,9 @@ namespace Clinic_Management_System.Repositories
         //Retrieve all patients using view model
         Task<List<PatientsViewModel>> GetPatients();
 
+        //Retrieve all doctors using view model
+        Task<List<DoctorsViewModel>> GetDoctors();
+
         //Retrieve all patients from model
         Task<List<Patients>> GetAllPatients();
 

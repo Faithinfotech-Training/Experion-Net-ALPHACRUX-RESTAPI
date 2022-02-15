@@ -196,5 +196,30 @@ namespace Clinic_Management_System.Repositories
             return null;
         }
         #endregion
+
+        #region Doctors List
+
+        //List doctors from view model
+
+        public async Task<List<DoctorsViewModel>> GetDoctors()
+        {
+            return await (
+                from d in _db.Staffs
+                from r in _db.Roles
+                from q in _db.Qualifications
+                where r.RoleId == d.RoleId && q.QualificationId == d.QualificationId && r.RoleName == "Doctor"
+                select new DoctorsViewModel
+                {
+                    DoctorId = d.StaffId,
+                    DoctorName = d.StaffName,
+                    Phone = d.StaffPhone,
+                    Email = d.StaffEmail,
+                    Qualification = q.QualificationName,
+                    RoleName = r.RoleName
+                }
+
+                ).ToListAsync();
+        }
+        #endregion
     }
 }

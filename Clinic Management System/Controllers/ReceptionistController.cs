@@ -45,7 +45,6 @@ namespace Clinic_Management_System.Controllers
         }
         #endregion
 
-
         #region Get patient by Id Token list
 
         // GET: api/Receptionist/patient
@@ -77,7 +76,7 @@ namespace Clinic_Management_System.Controllers
 
         // PUT: api/Receptionist/updatepatient
         [HttpPut("UpdatePatient")]
-        public async Task<IActionResult> UpdateEmployee([FromBody] Patients patients)
+        public async Task<IActionResult> UpdatePatient([FromBody] Patients patients)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +93,6 @@ namespace Clinic_Management_System.Controllers
             return BadRequest();
         }
         #endregion
-
 
         #region Add Patient
 
@@ -242,6 +240,28 @@ namespace Clinic_Management_System.Controllers
                     return NotFound();
                 }
                 return Ok(patients);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
+        #region Doctors list from view model
+
+        //HTTP: api/receptionist/doctors
+        [HttpGet("Doctors")]
+        public async Task<IActionResult> GetDoctors()
+        {
+            try
+            {
+                var doctors = await _rec.GetDoctors();
+                if (doctors == null)
+                {
+                    return NotFound();
+                }
+                return Ok(doctors);
             }
             catch (Exception)
             {
