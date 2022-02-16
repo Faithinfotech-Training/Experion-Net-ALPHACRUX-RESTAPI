@@ -270,5 +270,32 @@ namespace Clinic_Management_System.Controllers
         }
         #endregion
 
+        #region Delete token
+
+        //Method: /api/receptionist/deletetoken
+        [HttpDelete("DeleteToken/{id}")]
+        public async Task<IActionResult> DeleteToken(int? id)
+        {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                result = await _rec.DeleteToken(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
     }
 }

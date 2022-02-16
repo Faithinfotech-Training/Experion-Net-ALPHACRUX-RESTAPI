@@ -32,6 +32,7 @@ namespace Clinic_Management_System.Repository
                     where  t.PatientId == p.PatientId && t.StaffId == d.StaffId
                     select new ReceptionistViewModel
                     {
+                        TokenId = t.TokenId,
                         PatientId = p.PatientId,
                         PatientName = p.PatientName,
                         TokenNumber = (int)t.TokenNum,
@@ -66,13 +67,21 @@ namespace Clinic_Management_System.Repository
         {
             if (_db != null)
             {
+                var currentYear = DateTime.Now.Year;
+
                 return await (
                     from p in _db.Patients
-                    where p.PatientId == id
+                    from t in _db.Tokens
+                    from d in _db.Staffs
+                    where t.PatientId == p.PatientId && t.StaffId == d.StaffId && p.PatientId == id
                     select new ReceptionistViewModel
                     {
+                        TokenId = t.TokenId,
                         PatientId = p.PatientId,
-                        PatientName = p.PatientName
+                        PatientName = p.PatientName,
+                        TokenNumber = (int)t.TokenNum,
+                        Age = (currentYear - p.PatientDob.Year),
+                        DoctorName = d.StaffName
                     }
                     ).FirstOrDefaultAsync();
             }
@@ -218,6 +227,28 @@ namespace Clinic_Management_System.Repository
                 }
 
                 ).ToListAsync();
+        }
+        #endregion
+
+        #region Delete token
+
+        public async Task<int> DeleteToken(int? id)
+        {
+            int result = 0;
+            if (_db != null)
+            {
+                var tokens = await _db.Tokens.FirstOrDefaultAsync(token => token.TokenId == id);
+                if (tokens != null) //Check condition
+                {
+                    //Delete
+                    _db.Tokens.Remove(tokens);
+
+                    //Commiting to change the physical db
+                    result = await _db.SaveChangesAsync();
+                }
+                return result;
+            }
+            return result;
         }
         #endregion
     }

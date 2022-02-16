@@ -33,6 +33,9 @@ namespace Clinic_Management_System.Repository
         //Generate token
         Task<int> GenerateToken(Tokens token);
 
+        //Delete token
+        Task<int> DeleteToken(int? id);
+
         //List Payment record
         Task<List<ReceptionPaymentViewModel>> GetPaymentHistory();
 
