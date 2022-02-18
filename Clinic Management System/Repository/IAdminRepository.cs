@@ -18,7 +18,7 @@ namespace Clinic_Management_System.Repository
         Task<List<Staffs>> GetStaffs();
 
         //List from view model
-        Task<List<StaffsVM>> listStaffs();
+        Task<List<StaffsVM>> ListStaffs();
 
 
         //Get staff by id
@@ -45,7 +45,14 @@ namespace Clinic_Management_System.Repository
         Task<List<Roles>> GetRoles();
         #endregion
 
-        
+
+        #region Medicines
+
+        //List Medicines View Model
+        Task<List<MedicinesVM>> ListMedicines();
+        #endregion
+
+
     }
 }
 

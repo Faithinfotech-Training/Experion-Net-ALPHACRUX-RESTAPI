@@ -83,11 +83,11 @@ namespace Clinic_Management_System.Controllers
 
         //List staffs from view model -----------api/admin/liststaffs
         [HttpGet("ListStaffs")]
-        public async Task<IActionResult> listStaffs()
+        public async Task<IActionResult> ListStaffs()
         {
             try
             {
-                var staffs = await _adminRepo.listStaffs();
+                var staffs = await _adminRepo.ListStaffs();
                 if (staffs == null)
                 {
                     return NotFound();
@@ -138,6 +138,28 @@ namespace Clinic_Management_System.Controllers
                 }
             }
             return BadRequest();
+        }
+        #endregion
+
+        #region Medicines
+
+        //List Medicine inventory view model -----------api/admin/medicines
+        [HttpGet("Medicines")]
+        public async Task<IActionResult> ListMedicines()
+        {
+            try
+            {
+                var inventory = await _adminRepo.ListMedicines();
+                if (inventory == null)
+                {
+                    return NotFound();
+                }
+                return Ok(inventory);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
         #endregion
     }

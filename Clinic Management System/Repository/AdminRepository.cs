@@ -75,7 +75,7 @@ namespace Clinic_Management_System.Repository
         }
 
         //List staff details using view model
-        public async Task<List<StaffsVM>> listStaffs()
+        public async Task<List<StaffsVM>> ListStaffs()
         {
             if (_context != null)
             {
@@ -124,6 +124,35 @@ namespace Clinic_Management_System.Repository
                 _context.Staffs.Update(staff);
                 await _context.SaveChangesAsync();
             }
+        }
+        #endregion
+
+        #region Medicines
+
+        //List Medicines View Model
+        public async Task<List<MedicinesVM>> ListMedicines()
+        {
+            if (_context != null)
+            {
+                return await (
+                    from mfg in _context.Manufactures
+                    from med in _context.MedicineDetails
+                    from inv in _context.MedicineInventories
+                    where inv.ManufactureId == mfg.ManufactureId && inv.MedicineId == med.MedicineId
+                    select new MedicinesVM
+                    {
+                        InventoryId = inv.InventoryId,
+                        MedicineName = med.MedicineName,
+                        MedicineQuantity = inv.MedicineQuantity,
+                        MedicineType = inv.MedicineType,
+                        ManufactureName = mfg.ManufactureName,
+                        ManufacturingDate = med.ManufacturingDate,
+                         ExpiryDate = med.ExpiryDate,
+                         MedicinePrice = med.MedicinePrice
+                    }
+                    ).ToListAsync();
+            }
+            return null;
         }
         #endregion
     }
