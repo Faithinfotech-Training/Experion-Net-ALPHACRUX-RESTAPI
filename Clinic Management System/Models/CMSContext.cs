@@ -323,8 +323,6 @@ namespace Clinic_Management_System.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.MedicinePrice).HasColumnName("medicine_price");
-
-                entity.Property(e => e.MedicineQuantity).HasColumnName("medicine_quantity");
             });
 
             modelBuilder.Entity<MedicineInventories>(entity =>
@@ -340,12 +338,6 @@ namespace Clinic_Management_System.Models
 
                 entity.Property(e => e.MedicineId).HasColumnName("medicine_id");
 
-                entity.Property(e => e.MedicineName)
-                    .IsRequired()
-                    .HasColumnName("medicine_name")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.MedicineQuantity).HasColumnName("medicine_quantity");
 
                 entity.Property(e => e.MedicineType)
@@ -357,12 +349,12 @@ namespace Clinic_Management_System.Models
                 entity.HasOne(d => d.Manufacture)
                     .WithMany(p => p.MedicineInventories)
                     .HasForeignKey(d => d.ManufactureId)
-                    .HasConstraintName("FK__medicine___manuf__75A278F5");
+                    .HasConstraintName("FK__medicine___manuf__14270015");
 
                 entity.HasOne(d => d.Medicine)
                     .WithMany(p => p.MedicineInventories)
                     .HasForeignKey(d => d.MedicineId)
-                    .HasConstraintName("FK__medicine___medic__74AE54BC");
+                    .HasConstraintName("FK__medicine___medic__151B244E");
             });
 
             modelBuilder.Entity<MedicineLists>(entity =>

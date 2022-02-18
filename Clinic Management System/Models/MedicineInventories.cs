@@ -11,11 +11,10 @@ namespace Clinic_Management_System.Models
         }
 
         public int InventoryId { get; set; }
-        public string MedicineName { get; set; }
         public string MedicineType { get; set; }
-        public int MedicineQuantity { get; set; }
         public int? MedicineId { get; set; }
         public int? ManufactureId { get; set; }
+        public int? MedicineQuantity { get; set; }
 
         public virtual Manufactures Manufacture { get; set; }
         public virtual MedicineDetails Medicine { get; set; }

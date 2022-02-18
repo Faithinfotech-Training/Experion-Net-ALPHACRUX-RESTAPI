@@ -13,7 +13,6 @@ namespace Clinic_Management_System.Models
 
         public int MedicineId { get; set; }
         public string MedicineName { get; set; }
-        public int MedicineQuantity { get; set; }
         public int MedicinePrice { get; set; }
         public DateTime ExpiryDate { get; set; }
         public DateTime? ManufacturingDate { get; set; }
