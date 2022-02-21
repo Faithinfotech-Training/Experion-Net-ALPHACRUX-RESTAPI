@@ -154,6 +154,55 @@ namespace Clinic_Management_System.Repository
             }
             return null;
         }
+
+        //List Medicine Inventory from db
+        public async Task<List<MedicineInventories>> GetInventories()
+        {
+            if (_context != null)
+            {
+                return await _context.MedicineInventories.ToListAsync();
+            }
+            return null;
+        }
+        #endregion
+
+
+        #region Medicine Details
+
+        //List from db medicine details
+        public async Task<List<MedicineDetails>> GetMedicineDetails()
+        {
+            if (_context != null)
+            {
+                return await _context.MedicineDetails.ToListAsync();
+            }
+            return null;
+        }
+
+        //Add Medicine
+        public async Task<int> AddMedicine(MedicineDetails medicine)
+        {
+            if (_context != null)
+            {
+                await _context.MedicineDetails.AddAsync(medicine);
+                await _context.SaveChangesAsync(); //commit the transaction
+                return medicine.MedicineId;
+            }
+            return 0;
+        }
+        #endregion
+
+
+        #region Mfgs
+
+        public async Task<List<Manufactures>> GetMfgs()
+        {
+            if (_context != null)
+            {
+                return await _context.Manufactures.ToListAsync();
+            }
+            return null;
+        }
         #endregion
     }
 }

@@ -46,11 +46,31 @@ namespace Clinic_Management_System.Repository
         #endregion
 
 
-        #region Medicines
+        #region Medicines Inventory
 
         //List Medicines View Model
         Task<List<MedicinesVM>> ListMedicines();
+
+        //List Medicine Inventory from db
+        Task<List<MedicineInventories>> GetInventories();
+
         #endregion
+
+        #region Medicine Details
+
+        //List from db medicine details
+        Task<List<MedicineDetails>> GetMedicineDetails();
+
+        //Add Medicine
+        Task<int> AddMedicine(MedicineDetails medicine);
+        #endregion
+
+        #region Manufactures
+
+        //List from db
+        Task<List<Manufactures>> GetMfgs();
+        #endregion
+
 
 
     }

@@ -161,6 +161,65 @@ namespace Clinic_Management_System.Controllers
                 return BadRequest();
             }
         }
+
+
+        // api/admin/inventory
+        [HttpGet("Inventory")]
+        public async Task<ActionResult<IEnumerable<MedicineInventories>>> GetInventories()
+        {
+            return await _adminRepo.GetInventories();
+        }
+        #endregion
+
+
+        #region Get Qualifications
+
+        // api/admin/medicinedetails
+        [HttpGet("MedicineDetails")]
+        public async Task<ActionResult<IEnumerable<MedicineDetails>>> GetMedicineDetails()
+        {
+            return await _adminRepo.GetMedicineDetails();
+        }
+
+
+        // api/admin/addmedicine
+        [HttpPost("AddMedicine")]
+        public async Task<IActionResult> AddMedicine([FromBody] MedicineDetails medicine)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var medId = await _adminRepo.AddMedicine(medicine);
+                    if (medId > 0)
+                    {
+                        return Ok(medId);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
+        #endregion
+
+
+        #region Get Qualifications
+
+        // api/admin/mfgs
+        [HttpGet("Mfgs")]
+        public async Task<ActionResult<IEnumerable<Manufactures>>> GetMfgs()
+        {
+            return await _adminRepo.GetMfgs();
+        }
         #endregion
     }
 }
