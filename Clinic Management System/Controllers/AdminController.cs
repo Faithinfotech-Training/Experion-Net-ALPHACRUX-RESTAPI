@@ -172,7 +172,7 @@ namespace Clinic_Management_System.Controllers
         #endregion
 
 
-        #region Get Qualifications
+        #region Medicine details
 
         // api/admin/medicinedetails
         [HttpGet("MedicineDetails")]
