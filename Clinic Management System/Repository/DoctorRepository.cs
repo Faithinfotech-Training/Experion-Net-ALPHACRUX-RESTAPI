@@ -21,10 +21,24 @@ namespace Clinic_Management_System.Repository
             _context = context;
         }
 
+
         public async Task<List<Vitals>> GetVitalsList()
         {
             return await _context.Vitals.ToListAsync();
         }
+        #region Add Medicines
+
+        public async Task<int> PostMedicine(MedicineLists medicineLists)
+        {
+            if (_context != null)
+            {
+                await _context.MedicineLists.AddAsync(medicineLists);
+                await _context.SaveChangesAsync();
+                return medicineLists.MedicineListId;
+            }
+            return 0;
+        }
+        #endregion
 
         #region Add vitals
 
@@ -39,6 +53,116 @@ namespace Clinic_Management_System.Repository
             return 0;
         }
         #endregion
+
+        #region Generates Prescribed Medicine
+
+        public async Task<int> GeneratePrescriptionid(PrescribedMedicines prescribed)
+        {
+            if (_context != null)
+            {
+                await _context.PrescribedMedicines.AddAsync(prescribed);
+                await _context.SaveChangesAsync();
+                return prescribed.PrescriptionId;
+            }
+            return 0;
+        }
+        #endregion
+
+        #region Create Test Advice Id
+
+        public async Task<int> CreateTestAdviceId(TestAdvices testAdvice)
+        {
+            if (_context != null)
+            {
+                await _context.TestAdvices.AddAsync(testAdvice);
+                await _context.SaveChangesAsync();
+                return testAdvice.AdviceId;
+            }
+            return 0;
+        }
+
+        #endregion
+
+        #region Doctor adds Tests
+
+        public async Task<int> AddTest(TestLists testList)
+        {
+            if (_context != null)
+            {
+                await _context.TestLists.AddAsync(testList);
+                await _context.SaveChangesAsync();
+                return testList.TestListId;
+            }
+            return 0;
+        }
+
+        #endregion
+
+        #region List tests in doctor page
+
+        public async Task<List<TestDetailsViewModel>> ListTests()
+        {
+            if (_context != null)
+            {
+                return await (from testdetails in _context.TestDetails
+                              select new TestDetailsViewModel
+                              {
+                                  TestName = testdetails.TestName,
+                                  TestId = testdetails.TestId,
+
+                              }).ToListAsync();
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region doctor note
+
+        public async Task<int> CreateDoctorNote(MedicalHistory note)
+        {
+            if (_context != null)
+            {
+                await _context.MedicalHistory.AddAsync(note);
+                await _context.SaveChangesAsync();
+                return note.MedicalListId;
+            }
+            return 0;
+        }
+        #endregion
+
+        #region Medicine details
+        public async Task<int> AddMedicine(MedicineDetails medicineDetails)
+        {
+            if (_context != null)
+            {
+                await _context.MedicineDetails.AddAsync(medicineDetails);
+                await _context.SaveChangesAsync();
+                return medicineDetails.MedicineId;
+            }
+            return 0;
+        }
+        #endregion
+
+        #region List Medicine details in doctor page
+
+       
+
+        public async Task<List<MedicineViewModel>> MedicneList()
+        {
+            if (_context != null)
+            {
+                return await(from medicineDetails in _context.MedicineDetails
+                             select new MedicineViewModel
+                             {
+                                 MedicineName=medicineDetails.MedicineName,
+                                 MedicineId = medicineDetails.MedicineId,
+
+                             }).ToListAsync();
+            }
+            return null;
+        }
+
 
         /*
 
@@ -164,5 +288,45 @@ namespace Clinic_Management_System.Repository
         }
         #endregion
         */
+        #endregion
+
+
+        #region Add Test
+
+        public async Task<int> PostTest(TestLists testLists)
+        {
+            if (_context != null)
+            {
+                await _context.TestLists.AddAsync(testLists);
+                await _context.SaveChangesAsync();
+                return testLists.TestListId;
+            }
+            return 0;
+        }
+        #endregion
+
+        public async Task<List<MedicineLists>> GetMedicineList()
+        {
+            return await _context.MedicineLists.ToListAsync();
+        }
+
+        public async Task<List<TestLists>> GetTestList()
+        {
+            return await _context.TestLists.ToListAsync();
+        }
+
+        #region Test details
+        public async Task<int> AddTest(TestDetails testDetails)
+        {
+            if (_context != null)
+            {
+                await _context.TestDetails.AddAsync(testDetails);
+                await _context.SaveChangesAsync();
+                return testDetails.TestId;
+            }
+            return 0;
+        }
+        #endregion
     }
 }
+

@@ -31,14 +31,42 @@ namespace Clinic_Management_System.Repository
 
        Task<int> CreateDoctorNote(MedicalHistory note);
 
-        //Doctor prescribes medicine
-        Task<int> PostMedicine(DoctorViewModel medicine);
+      
 
         //Doctor advises lab test
 
         Task<int> PostLabTest(DoctorViewModel labTest);
 
         */
+        // generates prescriptionid
+        Task<int> GeneratePrescriptionid(PrescribedMedicines prescribed);
+        //Creates Test Advice Id
+        Task<int> CreateTestAdviceId(TestAdvices testAdvice);
+
+        //Doctor Adds Tests
+        Task<int> AddTest(TestLists testList);
+
+        //Testname listing in doctor page
+        Task<List<TestDetailsViewModel>> ListTests();
+
+        Task<int> CreateDoctorNote(MedicalHistory note);
+        //Doctor Adds Medicine
+        Task<int> AddMedicine(MedicineDetails medicineDetails);
+
+        //Medicine listing in doctor page
+        Task<List<MedicineViewModel>> MedicneList();
+
+        //Doctor prescribes medicine
+        Task<int> PostMedicine(MedicineLists medicineLists);
+
+        Task<List<MedicineLists>> GetMedicineList();
+        Task<int> AddTest(TestDetails testDetails);
+
+        //Doctor prescribes test
+        Task<int> PostTest(TestLists testLists);
+
+        //To get test
+        Task<List<TestLists>> GetTestList();
     }
 }
 
