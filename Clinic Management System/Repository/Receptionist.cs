@@ -68,13 +68,21 @@ namespace Clinic_Management_System.Repositories
         {
             if (_db != null)
             {
+                var currentYear = DateTime.Now.Year;
+
                 return await (
                     from p in _db.Patients
-                    where p.PatientId == id
+                    from t in _db.Tokens
+                    from d in _db.Staffs
+                    where t.PatientId == p.PatientId && t.StaffId == d.StaffId && p.PatientId == id
                     select new ReceptionistViewModel
                     {
+                        TokenId = t.TokenId,
                         PatientId = p.PatientId,
-                        PatientName = p.PatientName
+                        PatientName = p.PatientName,
+                        TokenNumber = (int)t.TokenNum,
+                        Age = (currentYear - p.PatientDob.Year),
+                        DoctorName = d.StaffName
                     }
                     ).FirstOrDefaultAsync();
             }
