@@ -1,11 +1,11 @@
-﻿using CMSFullProject.Models;
-using CMSFullProject.ViewModel;
+﻿using Clinic_Management_System.Models;
+using Clinic_Management_System.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CMSFullProject.Repository
+namespace Clinic_Management_System.Repository
 {
     public interface ILabTechnicianRepository
     {

@@ -1,5 +1,6 @@
-﻿using CMSFullProject.Models;
-using CMSFullProject.Repository;
+﻿using Clinic_Management_System.Models;
+using Clinic_Management_System.Repository;
+using Clinic_Management_System.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CMSFullProject.Controllers
+namespace Clinic_Management_System.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -72,7 +73,7 @@ namespace CMSFullProject.Controllers
                 if (patient == null)
                 {
                     return NotFound();
-                }
+        }
                 return Ok(patient);
             }
             catch (Exception)
@@ -116,7 +117,8 @@ namespace CMSFullProject.Controllers
         [Route("add")]
         public async Task<IActionResult> AddLabbills([FromBody] LabBills labbill)
         {
-            //check validation of body
+        //check validation of body
+        {
             if (ModelState.IsValid)
             {
                 try
@@ -141,7 +143,7 @@ namespace CMSFullProject.Controllers
 
         #endregion
 
-        //get user by username and password https://localhost:44310/api/users/login/sanu&sanu
+        //get user by username and password 
         #region getuser token
         [HttpGet("{Login}/{name}&{password}")]
         //[AllowAnonymous]
@@ -173,7 +175,7 @@ namespace CMSFullProject.Controllers
                     return response;
                 }
                 catch (Exception)
-                {
+        {
                     return BadRequest();
                 }
             }
@@ -182,13 +184,13 @@ namespace CMSFullProject.Controllers
         #endregion
         #endregion
 
-        #region Create report id
 
         [HttpPost]
         [Route("reportid")]
         public async Task<IActionResult> ReportId([FromBody] TestReportNew report)
         {
-            //check validation of body
+        //check validation of body
+        {
             if (ModelState.IsValid)
             {
                 try
@@ -247,7 +249,14 @@ namespace CMSFullProject.Controllers
 
 
 
+        [HttpGet]
+        [Route("viewallreports")]
 
+        public async Task<ActionResult<IEnumerable<TestReports>>> GetAllReports()
+        {
+            return await _labTechician.GetAllReports();
+        }
 
+        #endregion
     }
 }

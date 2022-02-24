@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CMSFullProject.ViewModel
+namespace Clinic_Management_System.ViewModel
 {
     public class TestReportViewModel
     {
