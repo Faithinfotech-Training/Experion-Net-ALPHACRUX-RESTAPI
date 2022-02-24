@@ -1,5 +1,5 @@
-﻿using Clinic_Management_System.Models;
-using Clinic_Management_System.Repository;
+﻿using CMS_Project.Models;
+using CMS_Project.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic_Management_System.Controllers
+namespace CMS_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,17 +21,17 @@ namespace Clinic_Management_System.Controllers
         }
         #region Get Prescription
         [HttpGet]
-        [Route("patients")]
-        public async Task<IActionResult> GetPrescriptions(int patientId)
+        [Route("prescription/{patientId}")]
+        public async Task<IActionResult> GetPrescriptions(int? patientId)
         {
-            if(patientId==0)
+            if (patientId == 0)
             {
                 return BadRequest();
             }
             try
             {
                 var patient = await _pharmacist.GetPrescription(patientId);
-                if (patient== null)
+                if (patient == null)
                 {
                     return NotFound();
                 }
@@ -45,10 +45,11 @@ namespace Clinic_Management_System.Controllers
 
         #endregion
 
+        
         #region Create bills
         [HttpPost]
         [Route("patients")]
-        public async Task<IActionResult> CreateBills([FromBody]MedicineBills bill)
+        public async Task<IActionResult> CreateBills([FromBody] MedicineBills bill)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Clinic_Management_System.Controllers
                     {
                         return NotFound();
                     }
-                   
+
                 }
                 catch (Exception)
                 {
@@ -73,6 +74,7 @@ namespace Clinic_Management_System.Controllers
             return BadRequest();
         }
         [HttpGet]
+        [Route("patient")]
         public async Task<ActionResult<IEnumerable<MedicineBills>>> GetAllBills()
         {
             return await _pharmacist.GetAllBill();
@@ -81,5 +83,34 @@ namespace Clinic_Management_System.Controllers
 
 
         #endregion
+
+
+        #region
+        [HttpGet]
+        [Route("getmedicinelist/{id}")]
+        public async Task<IActionResult> GetMedicines(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var patient = await _pharmacist.GetMedicineList(id);
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+                return Ok(patient);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        #endregion
+        
     }
 }
+

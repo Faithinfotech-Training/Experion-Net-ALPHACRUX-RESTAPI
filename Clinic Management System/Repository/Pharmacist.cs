@@ -1,14 +1,14 @@
 ﻿using Clinic_Management_System.Models;
-using Clinic_Management_System.ViewModel;
+using CMS_Project.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic_Management_System.Repository
+namespace CMS_Project.Repository
 {
-    public class Pharmacist : IPharmacist
+    public class Pharmacist : IPharmacist   
     {
         //data fields
         private readonly CMSContext _context;
@@ -16,35 +16,46 @@ namespace Clinic_Management_System.Repository
         //default constructor injection
         public Pharmacist(CMSContext context)
         {
-            _context=context;
+            _context = context;
         }
+
         #region Get Prescription
-        public async Task<PharmacistViewModel> GetPrescription(int patientId)
+        public async Task<GetPrescriptionViewModel> GetPrescription(int? patientId)
         {
             if (_context != null)
             {
                 //linq 
-                return await (from a in _context.PrescribedMedicines
-                              from b in _context.Patients
-                              from c in _context.MedicineLists
-                              where a.PatientId == patientId 
-                              select new PharmacistViewModel
+                return await (from pres in _context.PrescribedMedicines
+                              from list in _context.MedicineLists
+                              from details in _context.MedicineDetails
+                              from patient in _context.Patients
+                              from staff in _context.Staffs
+
+                              where pres.PrescriptionId == list.PrescriptionId
+                              && list.MedicineId == details.MedicineId
+                              && patient.PatientId == patientId
+                              && pres.StaffId == staff.StaffId
+                              && pres.PatientId == patient.PatientId
+
+                              select new GetPrescriptionViewModel
                               {
-                                  PatientId = b.PatientId,
-                                  PatientName = b.PatientName,
-                                  MedicineId = c.MedicineListId,
-                                  MedicineName = c.MedicineName,
-                                  Dosage=c.Dosage,
-                                  Duration=c.Duration
-                              }).FirstOrDefaultAsync();
-            }return null;
+                                 PatientId= (int)pres.PatientId,
+                                 PatientName=patient.PatientName,
+                                 PrescriptionDateTime=pres.PrescriptionDateTime,
+                                 StaffName=staff.StaffName,
+                                 StaffId=staff.StaffId,
+                                 PrescriptionId= (int)list.PrescriptionId
+                              }
+                    ).FirstOrDefaultAsync();
+            }
+            return null;
         }
         #endregion
         #region generate bill
-        
+
         public async Task<int> CreatePharmacyBill(MedicineBills bill)
         {
-            if (_context !=null)
+            if (_context != null)
             {
                 await _context.MedicineBills.AddAsync(bill);
                 await _context.SaveChangesAsync();
@@ -66,5 +77,44 @@ namespace Clinic_Management_System.Repository
         }
 
 
+
+        #region Get Medicine List
+
+        public async Task<List<PharmacyList>> GetMedicineList(int? id)
+        {
+           if(_context != null)
+            {
+                return await (
+                    from list in _context.MedicineLists
+                    from details in _context.MedicineDetails
+                    where list.PrescriptionId == id
+                    && list.MedicineId == details.MedicineId
+                    select new PharmacyList
+                    {
+                        MedicineId = (int)list.MedicineId,
+                        MedicineName =details.MedicineName,
+                        Dosage = list.Dosage,
+                        Duration = list.Duration,
+                        MedicinePrice = details.MedicinePrice
+
+                    }
+                    ).ToListAsync();
+            }
+            return null;
+
+        }
+
+        Task<GetPrescriptionViewModel> IPharmacist.GetPrescription(int? patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<PharmacyList>> IPharmacist.GetMedicineList(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        #endregion
     }
 }

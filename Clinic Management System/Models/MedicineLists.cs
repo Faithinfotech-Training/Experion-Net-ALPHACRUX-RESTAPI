@@ -7,7 +7,7 @@ namespace Clinic_Management_System.Models
     {
         public int MedicineListId { get; set; }
         public string MedicineName { get; set; }
-        public int Dosage { get; set; }
+        public string Dosage { get; set; }
         public int Duration { get; set; }
         public int? MedicineId { get; set; }
         public int? PrescriptionId { get; set; }

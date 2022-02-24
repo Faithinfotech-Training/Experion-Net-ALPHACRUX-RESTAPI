@@ -1,24 +1,29 @@
 ﻿using Clinic_Management_System.Models;
-using Clinic_Management_System.ViewModel;
+
+using CMS_Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic_Management_System.Repository
+namespace CMS_Project.Repository
 {
     public interface IPharmacist
     {
         // Retrieve patient prescription
-        Task<PharmacistViewModel>GetPrescription(int patientId);
-    
+        Task<GetPrescriptionViewModel> GetPrescription(int? patientId);
+
         //Create medicine bill
         Task<int> CreatePharmacyBill(MedicineBills bill);
 
-       
+        //get all medicine bills
+
         Task<List<MedicineBills>> GetAllBill();
 
+        //get all medicine list
 
+        Task<List<PharmacyList>> GetMedicineList(int? id);
 
+        
     }
 }
