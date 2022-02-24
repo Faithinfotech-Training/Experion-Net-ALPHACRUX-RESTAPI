@@ -54,6 +54,15 @@ namespace Clinic_Management_System.Repository
         //List Medicine Inventory from db
         Task<List<MedicineInventories>> GetInventories();
 
+        //Delete inventory
+        Task<int> DeleteInventory(int? id);
+
+        //Add inventory to db
+        Task<int> AddInventory(MedicineInventories inv);
+
+        //Get inventory by id
+        Task<ActionResult<MedicineInventories>> GetInventoryById(int? id);
+
         #endregion
 
         #region Medicine Details

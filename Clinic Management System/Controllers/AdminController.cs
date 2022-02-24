@@ -169,6 +169,76 @@ namespace Clinic_Management_System.Controllers
         {
             return await _adminRepo.GetInventories();
         }
+
+        // api/admin/inventory
+        [HttpPost("Inventory")]
+        public async Task<IActionResult> AddInventory([FromBody] MedicineInventories inv)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var InvId = await _adminRepo.AddInventory(inv);
+                    if (InvId > 0)
+                    {
+                        return Ok(InvId);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
+        //Get a inventory by id  ---api/admin/Inventory/{id}
+        [HttpGet("Inventory/{id}")]
+        public async Task<ActionResult<MedicineInventories>> GetInventoryById(int? id)
+        {
+            try
+            {
+                var inv = await _adminRepo.GetInventoryById(id);
+                if (inv == null)
+                {
+                    return NotFound();
+                }
+                return inv;        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        // api/admin/deleteinventory
+        [HttpDelete("DeleteInventory/{id}")]
+        public async Task<IActionResult> DeleteInventory(int? id)
+        {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                result = await _adminRepo.DeleteInventory(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
         #endregion
 
 

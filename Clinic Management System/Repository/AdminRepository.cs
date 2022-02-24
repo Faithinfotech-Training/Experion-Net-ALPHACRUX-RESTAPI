@@ -164,6 +164,53 @@ namespace Clinic_Management_System.Repository
             }
             return null;
         }
+
+
+        //Delete inventory
+        public async Task<int> DeleteInventory(int? id)
+        {
+
+            {
+                int result = 0;
+                if (_context != null)
+                {
+                    var inventory = await _context.MedicineInventories.FirstOrDefaultAsync(inv => inv.InventoryId == id);
+                    if (inventory != null) //Check condition
+                    {
+                        //Delete
+                        _context.MedicineInventories.Remove(inventory);
+
+                        //Commiting to change the physical db
+                        result = await _context.SaveChangesAsync();
+                    }
+                    return result;
+                }
+                return result;
+            }
+        }
+
+        //Add to inventory
+        public async Task<int> AddInventory(MedicineInventories inv)
+        {
+            if (_context != null)
+            {
+                await _context.MedicineInventories.AddAsync(inv);
+                await _context.SaveChangesAsync(); //commit the transaction
+                return inv.InventoryId;
+            }
+            return 0;
+        }
+
+        //Get inventory by id
+        public async Task<ActionResult<MedicineInventories>> GetInventoryById(int? id)
+        {
+            if (_context != null)
+            {
+                var inv = await _context.MedicineInventories.FindAsync(id);  //Primary key
+                return inv;
+            }
+            return null;
+        }
         #endregion
 
 
