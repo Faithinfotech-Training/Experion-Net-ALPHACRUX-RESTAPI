@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Clinic_Management_System.Models;
 using Clinic_Management_System.Repositories;
+using Clinic_Management_System.Models;
 
 namespace Clinic_Management_System.Controllers
 {
@@ -249,6 +245,162 @@ namespace Clinic_Management_System.Controllers
             }
         }
         #endregion
+
+
+        #region Get patient by Id For insertion and deletion
+
+        // GET: api/Receptionist/patientid
+        [HttpGet]
+        [Route("patient/{id}")]
+        public async Task<IActionResult> GetPatients(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var patient = await _rec.GetPatientDetails(id);
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+                return Ok(patient);
+            }
+            catch (Exception)
+            {
+                return BadRequest("There is an error");
+            }
+        }
+        #endregion
+
+        #region Get patienttoken
+
+        // GET: api/receptionist/tokenqueue/patientid/
+        [HttpGet]
+        [Route("tokenqueue/patientid/{id}")]
+        public async Task<IActionResult> GetPatientToken(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var patient = await _rec.GetPatientToken(id);
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+                return Ok(patient);
+            }
+            catch (Exception)
+            {
+                return BadRequest("There is an error");
+            }
+        }
+        #endregion
+
+        #region Doctors list from view model
+
+        //HTTP: api/receptionist/doctors
+        [HttpGet("Doctors")]
+        public async Task<IActionResult> GetDoctors()
+        {
+            try
+            {
+                var doctors = await _rec.GetDoctors();
+                if (doctors == null)
+                {
+                    return NotFound();
+                }
+                return Ok(doctors);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
+        #region Delete token
+
+        //Method: /api/receptionist/deletetoken
+        [HttpDelete("DeleteToken/{id}")]
+        public async Task<IActionResult> DeleteToken(int? id)
+        {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                result = await _rec.DeleteToken(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
+        #region reception bill listing
+        [HttpGet]
+        [Route("reception/bills")]
+        public async Task<IActionResult> GetConsultBills()
+        {
+            try
+            {
+                var payments = await _rec.GetConsultBills();
+                if (payments == null)
+                {
+                    return NotFound();
+                }
+                return Ok(payments);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        #endregion
+
+        #region Create Bill
+        // POST: api/Receptionist/addbill
+        [HttpPost]
+        [Route("AddBill")]
+        public async Task<IActionResult> AddBill([FromBody] ConsultationBills bills)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var billid = await _rec.AddBill(bills);
+                    if (billid > 0)
+                    {
+                        return Ok(billid);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
+        #endregion
+
 
     }
 }

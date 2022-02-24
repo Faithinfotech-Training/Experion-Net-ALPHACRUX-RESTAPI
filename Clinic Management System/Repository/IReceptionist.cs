@@ -1,9 +1,8 @@
 ﻿using Clinic_Management_System.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Clinic_Management_System.Models;
+
 
 namespace Clinic_Management_System.Repositories
 {
@@ -35,5 +34,31 @@ namespace Clinic_Management_System.Repositories
 
         //Generate Consultation bills
         Task<int> PostCosnultationBill(ConsultationBills bills);
+
+        //get patient by id for Form updation
+        Task<PatientsViewModel> GetPatientDetails(int? id);
+
+        //Retrieve all doctors using view model
+        Task<List<DoctorsViewModel>> GetDoctors();
+
+        //Delete token
+        Task<int> DeleteToken(int? id);
+
+
+        ///token
+        Task<ReceptionistViewModel> GetPatientToken(int? id);
+
+
+        //get consultation bills
+
+        Task<List<ConsultationViewModel>> GetConsultBills();
+
+
+        //post consultation bill
+        Task<int> AddBill(ConsultationBills bills);
+        
+
+
+
     }
 }

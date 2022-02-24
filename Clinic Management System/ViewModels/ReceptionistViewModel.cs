@@ -7,11 +7,12 @@ namespace Clinic_Management_System.ViewModels
 {
     public class ReceptionistViewModel
     {
+        public int StaffId { get; set; }
         public int PatientId { get; set; }
         public string PatientName { get; set; }
         public int TokenNumber { get; set; }
         public int Age { get; set; }
         public string DoctorName { get; set; }
-
+        public int TokenId { get; internal set; }
     }
 }

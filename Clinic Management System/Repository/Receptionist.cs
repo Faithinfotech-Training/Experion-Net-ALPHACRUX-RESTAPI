@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Clinic_Management_System.Repositories;
 using Clinic_Management_System.Models;
 using Clinic_Management_System.ViewModels;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Clinic_Management_System.Repositories
@@ -17,7 +17,7 @@ namespace Clinic_Management_System.Repositories
         {
             _db = db;
         }
-        #region Get All patients
+        #region Get All token for  patients
 
         //Get Token Queue
         public async Task<List<ReceptionistViewModel>> GetTokenQueue()
@@ -30,13 +30,14 @@ namespace Clinic_Management_System.Repositories
                     from p in _db.Patients
                     from t in _db.Tokens
                     from d in _db.Staffs
-                    where  t.PatientId == p.PatientId && t.StaffId == d.StaffId
+                    where t.PatientId == p.PatientId && t.StaffId == d.StaffId
                     select new ReceptionistViewModel
                     {
+                        TokenId = t.TokenId,
                         PatientId = p.PatientId,
                         PatientName = p.PatientName,
                         TokenNumber = (int)t.TokenNum,
-                        Age = (currentYear-p.PatientDob.Year),
+                        Age = (currentYear - p.PatientDob.Year),
                         DoctorName = d.StaffName
                     }
                     ).ToListAsync();
@@ -180,6 +181,7 @@ namespace Clinic_Management_System.Repositories
             {
                 return await (
                     from p in _db.Patients
+                    orderby p.PatientId descending
                     select new PatientsViewModel
                     {
                         PatientId = p.PatientId,
@@ -196,5 +198,156 @@ namespace Clinic_Management_System.Repositories
             return null;
         }
         #endregion
+
+        #region Get Patient details for insertion and deletion
+
+        public async Task<PatientsViewModel> GetPatientDetails(int? id)
+        {
+            if (_db != null)
+            {
+                return await (
+                    from p in _db.Patients
+                    where p.PatientId == id
+                    select new PatientsViewModel
+                    {
+                        PatientId = p.PatientId,
+                        PatientName = p.PatientName,
+                        PatientGender = p.PatientGender,
+                        PatientLocation = p.PatientLocation,
+                        PatientPhone = p.PatientPhone,
+                        PatientWeight = p.PatientWeight,
+                        PatientBlood = p.PatientBlood,
+                        PatientDob = p.PatientDob
+
+                    }
+                    ).FirstOrDefaultAsync();
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Get Patient token
+
+        public async Task<ReceptionistViewModel> GetPatientToken(int? id)
+        {
+            if (_db != null)
+            {
+                var currentYear = DateTime.Now.Year;
+                return await (
+                    from t in _db.Tokens
+                    from p in _db.Patients
+                    from s in _db.Staffs
+                    where t.PatientId == id && t.PatientId == p.PatientId && t.StaffId == s.StaffId
+                    select new ReceptionistViewModel
+                    {
+                        TokenId = t.TokenId,
+                        PatientId = p.PatientId,
+                        PatientName = p.PatientName,
+                        TokenNumber = (int)t.TokenNum,
+                        Age = (currentYear - p.PatientDob.Year),
+                        StaffId = s.StaffId,
+                        DoctorName = s.StaffName
+
+                    }
+                    ).FirstOrDefaultAsync();
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Doctors List
+
+        //List doctors from view model
+
+        public async Task<List<DoctorsViewModel>> GetDoctors()
+        {
+            return await (
+                from d in _db.Staffs
+                from r in _db.Roles
+                from q in _db.Qualifications
+                where r.RoleId == d.RoleId && q.QualificationId == d.QualificationId && r.RoleName == "Doctor"
+                select new DoctorsViewModel
+                {
+                    DoctorId = d.StaffId,
+                    DoctorName = d.StaffName,
+                    Phone = d.StaffPhone,
+                    Email = d.StaffEmail,
+                    Qualification = q.QualificationName,
+                    RoleName = r.RoleName
+                }
+
+                ).ToListAsync();
+        }
+        #endregion
+
+        #region Delete token
+
+        public async Task<int> DeleteToken(int? id)
+        {
+            int result = 0;
+            if (_db != null)
+            {
+                var tokens = await _db.Tokens.FirstOrDefaultAsync(token => token.TokenId == id);
+                if (tokens != null) //Check condition
+                {
+                    //Delete
+                    _db.Tokens.Remove(tokens);
+
+                    //Commiting to change the physical db
+                    result = await _db.SaveChangesAsync();
+                }
+                return result;
+            }
+            return result;
+        }
+        #endregion
+
+
+        #region Get consultation bills
+
+        public async Task<List<ConsultationViewModel>> GetConsultBills()
+        {
+
+            return await (
+                from c in _db.ConsultationBills
+                from p in _db.Patients
+                from s in _db.Staffs
+                where c.PatientId == p.PatientId && c.StaffId == s.StaffId
+                orderby c.ConsultationDateTime descending
+                select new ConsultationViewModel
+                {
+                    ConsultationBillId = c.ConsultationBillId,
+                    ConsultationDateTime = c.ConsultationDateTime,
+                    ConsultationAmount = 200,
+                    PatientId = p.PatientId,
+                    PatientName = p.PatientName,
+                    StaffId = s.StaffId,
+                    StaffName = s.StaffName
+                }
+
+                ).ToListAsync();
+        }
+        #endregion
+
+
+        #region Add Bill
+
+        //Add a new patient
+        public async Task<int> AddBill(ConsultationBills bills)
+        {
+            if (_db != null)
+            {
+                await _db.ConsultationBills.AddAsync(bills);
+                await _db.SaveChangesAsync();
+                return bills.ConsultationBillId;
+            }
+            return 0;
+        }
+        #endregion
+
     }
+
+
 }
