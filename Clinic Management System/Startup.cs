@@ -32,6 +32,9 @@ namespace Clinic_Management_System
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Swagger
+            services.AddSwaggerGen();
+
             services.AddControllers();
             //ConnectionString for databases
             services.AddDbContext<CMSContext>(db =>
@@ -79,6 +82,14 @@ namespace Clinic_Management_System
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(
+                    options =>
+                    {
+                        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                        options.RoutePrefix = string.Empty;
+                    }
+                    );
             }
 
             app.UseHttpsRedirection();

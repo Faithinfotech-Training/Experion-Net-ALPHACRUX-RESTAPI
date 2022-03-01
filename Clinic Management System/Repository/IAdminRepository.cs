@@ -63,6 +63,8 @@ namespace Clinic_Management_System.Repository
         //Get inventory by id
         Task<ActionResult<MedicineInventories>> GetInventoryById(int? id);
 
+        //Update inventory
+        Task UpdateInventory(MedicineInventories inventories);
         #endregion
 
         #region Medicine Details
@@ -72,12 +74,24 @@ namespace Clinic_Management_System.Repository
 
         //Add Medicine
         Task<int> AddMedicine(MedicineDetails medicine);
+
+        //Delete Medicine
+        Task<int> DeleteMedicine(int? id);
+
+        //Update Medicine
+        Task UpdateMedicine(MedicineDetails medicine);
         #endregion
 
         #region Manufactures
 
         //List from db
         Task<List<Manufactures>> GetMfgs();
+
+        //Delete mfg
+        Task<int> DeleteManufacture(int? id);
+
+        //Update Manufacture
+        Task UpdateManufacture(Manufactures manufacture);
         #endregion
 
 

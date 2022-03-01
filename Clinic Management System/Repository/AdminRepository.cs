@@ -22,7 +22,7 @@ namespace Clinic_Management_System.Repository
             _context = context;
         }
 
-        
+
 
         #region Qualifications
 
@@ -104,17 +104,17 @@ namespace Clinic_Management_System.Repository
         //Get a staff by id
         public async Task<ActionResult<Staffs>> GetStaffById(int? id)
         {
-            
-                if (_context != null)
-                {
-                    var staff = await _context.Staffs.FindAsync(id);  //Primary key
-                    return staff;
-                }
-                return null;
-            
+
+            if (_context != null)
+            {
+                var staff = await _context.Staffs.FindAsync(id);  //Primary key
+                return staff;
+            }
+            return null;
+
         }
 
-        
+
         //Update staff
         public async Task UpdateStaff(Staffs staff)
         {
@@ -147,8 +147,8 @@ namespace Clinic_Management_System.Repository
                         MedicineType = inv.MedicineType,
                         ManufactureName = mfg.ManufactureName,
                         ManufacturingDate = med.ManufacturingDate,
-                         ExpiryDate = med.ExpiryDate,
-                         MedicinePrice = med.MedicinePrice
+                        ExpiryDate = med.ExpiryDate,
+                        MedicinePrice = med.MedicinePrice
                     }
                     ).ToListAsync();
             }
@@ -169,24 +169,21 @@ namespace Clinic_Management_System.Repository
         //Delete inventory
         public async Task<int> DeleteInventory(int? id)
         {
-
+            int result = 0;
+            if (_context != null)
             {
-                int result = 0;
-                if (_context != null)
+                var inventory = await _context.MedicineInventories.FirstOrDefaultAsync(inv => inv.InventoryId == id);
+                if (inventory != null) //Check condition
                 {
-                    var inventory = await _context.MedicineInventories.FirstOrDefaultAsync(inv => inv.InventoryId == id);
-                    if (inventory != null) //Check condition
-                    {
-                        //Delete
-                        _context.MedicineInventories.Remove(inventory);
+                    //Delete
+                    _context.MedicineInventories.Remove(inventory);
 
-                        //Commiting to change the physical db
-                        result = await _context.SaveChangesAsync();
-                    }
-                    return result;
+                    //Commiting to change the physical db
+                    result = await _context.SaveChangesAsync();
                 }
                 return result;
             }
+            return result;
         }
 
         //Add to inventory
@@ -210,6 +207,17 @@ namespace Clinic_Management_System.Repository
                 return inv;
             }
             return null;
+        }
+
+        //Update inventory
+        public async Task UpdateInventory(MedicineInventories inventories)
+        {
+            if (_context != null)
+            {
+                _context.Entry(inventories).State = EntityState.Modified;
+                _context.MedicineInventories.Update(inventories);
+                await _context.SaveChangesAsync();
+            }
         }
         #endregion
 
@@ -237,11 +245,43 @@ namespace Clinic_Management_System.Repository
             }
             return 0;
         }
+
+        //Delete Medicine
+        public async Task<int> DeleteMedicine(int? id)
+        {   
+            int result = 0;
+            if (_context != null)
+            {
+                var medicines = await _context.MedicineDetails.FirstOrDefaultAsync(medicine => medicine.MedicineId == id);
+                if (medicines != null) //Check condition
+                {
+                    //Delete
+                    _context.MedicineDetails.Remove(medicines);
+
+                    //Commiting to change the physical db
+                    result = await _context.SaveChangesAsync();
+                }
+                return result;
+            }
+            return result;
+        }
+
+        //Update MedicineDetails
+        public async Task UpdateMedicine(MedicineDetails medicine)
+        {
+            if (_context != null)
+            {
+                _context.Entry(medicine).State = EntityState.Modified;
+                _context.MedicineDetails.Update(medicine);
+                await _context.SaveChangesAsync();
+            }
+        }
         #endregion
 
 
         #region Mfgs
 
+        //List Manufactures
         public async Task<List<Manufactures>> GetMfgs()
         {
             if (_context != null)
@@ -249,6 +289,38 @@ namespace Clinic_Management_System.Repository
                 return await _context.Manufactures.ToListAsync();
             }
             return null;
+        }
+
+
+        // Delete Manufactures
+        public async Task<int> DeleteManufacture(int? id)
+        {
+            int result = 0;
+            if (_context != null)
+            {
+                var mfgs = await _context.Manufactures.FirstOrDefaultAsync(mfg => mfg.ManufactureId == id);
+                if (mfgs != null) //Check condition
+                {
+                    //Delete
+                    _context.Manufactures.Remove(mfgs);
+
+                    //Commiting to change the physical db
+                    result = await _context.SaveChangesAsync();
+                }
+                return result;
+            }
+            return result;
+        }
+
+        //Update Manufactures
+        public async Task UpdateManufacture(Manufactures manufacture)
+        {
+            if (_context != null)
+            {
+                _context.Entry(manufacture).State = EntityState.Modified;
+                _context.Manufactures.Update(manufacture);
+                await _context.SaveChangesAsync();
+            }
         }
         #endregion
     }

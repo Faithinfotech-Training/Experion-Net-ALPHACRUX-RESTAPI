@@ -54,8 +54,8 @@ namespace Clinic_Management_System.Controllers
             return await _adminRepo.GetStaffs();
         }
 
-        // api/admin/staff
-        [HttpPost("Staff")]
+        // api/admin/staffs
+        [HttpPost("Staffs")]
         public async Task<IActionResult> AddStaff([FromBody] Staffs staff)
         {
             //Check the validation of body
@@ -81,8 +81,8 @@ namespace Clinic_Management_System.Controllers
             return BadRequest();
         }
 
-        //List staffs from view model -----------api/admin/liststaffs
-        [HttpGet("ListStaffs")]
+        //List staffs from view model -----------api/admin/staff-details
+        [HttpGet("Staff-Details")]
         public async Task<IActionResult> ListStaffs()
         {
             try
@@ -102,7 +102,7 @@ namespace Clinic_Management_System.Controllers
 
 
         //Get a staff by id  ---api/admin/staff/1
-        [HttpGet("Staff/{id}")]
+        [HttpGet("Staffs/{id}")]
         public async Task<ActionResult<Staffs>> GetStaffById(int? id)
         {
             try
@@ -121,7 +121,7 @@ namespace Clinic_Management_System.Controllers
         }
 
         //Update staff  ------------api/admin/updatestaff/1
-        [HttpPut("UpdateStaff")]
+        [HttpPut("Staffs")]
         public async Task<IActionResult> UpdateStaff([FromBody] Staffs staff)
         {
             //Check the validation of body
@@ -216,8 +216,28 @@ namespace Clinic_Management_System.Controllers
             }
         }
 
-        // api/admin/deleteinventory
-        [HttpDelete("DeleteInventory/{id}")]
+        //Update inventory  ---api/admin/Inventory/{id}
+        [HttpPut("Inventory/{id}")]
+        public async Task<IActionResult> UpdateInventory([FromBody] MedicineInventories inventories)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _adminRepo.UpdateInventory(inventories);
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
+        // api/admin/inventory/{id}
+        [HttpDelete("Inventory/{id}")]
         public async Task<IActionResult> DeleteInventory(int? id)
         {
             int result = 0;
@@ -241,19 +261,18 @@ namespace Clinic_Management_System.Controllers
         }
         #endregion
 
-
         #region Medicine details
 
-        // api/admin/medicinedetails
-        [HttpGet("MedicineDetails")]
+        // api/admin/medicine-details
+        [HttpGet("Medicine-Details")]
         public async Task<ActionResult<IEnumerable<MedicineDetails>>> GetMedicineDetails()
         {
             return await _adminRepo.GetMedicineDetails();
         }
 
 
-        // api/admin/addmedicine
-        [HttpPost("AddMedicine")]
+        // api/admin/medicines
+        [HttpPost("Medicines")]
         public async Task<IActionResult> AddMedicine([FromBody] MedicineDetails medicine)
         {
             //Check the validation of body
@@ -279,16 +298,104 @@ namespace Clinic_Management_System.Controllers
             return BadRequest();
         }
 
+        // api/admin/medicine-details/{id}
+        [HttpDelete("Medicine-Details/{id}")]
+        public async Task<IActionResult> DeleteMedicine(int? id)
+        {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                result = await _adminRepo.DeleteMedicine(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        //Update Medicine Details  ------------api/admin/medicine-details/{id}
+        [HttpPut("Medicine-Details/{id}")]
+        public async Task<IActionResult> UpdateMedicine([FromBody] MedicineDetails medicine)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _adminRepo.UpdateMedicine(medicine);
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
         #endregion
 
-
-        #region Get Qualifications
+        #region Get Manufactures
 
         // api/admin/mfgs
         [HttpGet("Mfgs")]
         public async Task<ActionResult<IEnumerable<Manufactures>>> GetMfgs()
         {
             return await _adminRepo.GetMfgs();
+        }
+
+        // api/admin/Mfgs/{id}
+        [HttpDelete("Mfgs/{id}")]
+        public async Task<IActionResult> DeleteManufacture(int? id)
+        {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                result = await _adminRepo.DeleteManufacture(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();        //return Ok(employee);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        //Update Manufactures  ------------api/admin/mfgs/{id}
+        [HttpPut("Mfgs/{id}")]
+        public async Task<IActionResult> UpdateManufacture([FromBody] Manufactures manufacture)
+        {
+            //Check the validation of body
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _adminRepo.UpdateManufacture(manufacture);
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
         }
         #endregion
     }
